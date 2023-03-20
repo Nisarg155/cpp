@@ -1,70 +1,65 @@
-#include<bits/stdc++.h>
-using namespace std ;
-void merge_the_arr(vector<int> &v,int begin ,int mid,int end)
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+void ms_merge(int *&p, int low, int mid, int high)
 {
-    vector <int> a1,a2;
-    vector<int> a3;
-    for (int i = begin; i <= mid; i++)
+    int *arr3 = new int [high - low + 1];
+    int i = low, j = mid + 1, k = 0;
+    while ((i <= mid) && (j <= high))
     {
-        a1.push_back(v[i]);
-    }
-    for (int i = mid +1; i <= end; i++)
-    {
-        a2.push_back(v[i]);
-    }
-    a1.push_back(INT_MAX);
-    a2.push_back(INT_MAX);
-    int left = 0, right = 0,p = 0;
-    int n1 = a1.size() -1,n2 = a2.size() -1,n3 = n1+n2;
-    while ((left<n1)||(right<n2) && p < n3)
-    {
-        if(a1[left]<=a2[right])
+        if (p[i] < p[j])
         {
-            a3.push_back(a1[left++]);
-            p++;
+            arr3[k++] = p[i++];
         }
         else
         {
-            a3.push_back(a2[right++]);
-            p++;
+            arr3[k++] = p[j++];
         }
     }
-    for (int i = begin,y = 0; i <=end; i++,y++)
+    while (i <= mid)
     {
-        v[i] = a3[y];
+        arr3[k++] = p[i++];
     }
+    while (j <= high)
+    {
+        arr3[k++] = p[j++];
+    }
+    for (int i = low, y = 0; i <= high; y++, i++)
+    {
+        p[i] = arr3[y];
+    }
+    delete(arr3);
 }
-void ms(vector<int> &v,int begin,int end)
+
+void ms(int *&p, int low, int high)
 {
-    if(begin >= end)
-    {
+    if (low >= high)
         return;
-    }
-    int mid = (begin + end )/2;
-    ms(v,begin,mid);
-    ms(v,mid+1,end);
-    merge_the_arr(v,begin,mid,end);
 
+    int mid = low + (high - low) / 2;
+    ms(p, low, mid);
+    ms(p, mid + 1, high);
+
+    ms_merge(p, low, mid, high);
 }
-
-
 int main()
 {
-    int n,x;
-    cout<<"No. of ele in array :- ";
-    cin>>n;
-    vector<int> v;
+    int n;
+    cin >> n;
+    int *p = new int[n];
     for (int i = 0; i < n; i++)
     {
-        cout<<"Enter ele no "<<(i+1)<<" :- ";
-        cin>>x;
-        v.push_back(x);
+        cin >> p[i];
     }
 
-    ms(v,0,n-1);
+    ms(p, 0, n - 1);
     for (int i = 0; i < n; i++)
     {
-        cout<<"Ele no "<<(i+1)<<" is :- "<<v[i]<<endl;
+        cout << p[i] << " ";
     }
+
     return 0;
 }
