@@ -1,31 +1,9 @@
-#include<iostream>
-
-#include<iomanip>
+#include<bits/stdc++.h>
 using namespace std;
-
 int main()
-
 {
-
-
-
-
-std::cout << std::left << std::setfill('4');
-
-std::cout << std::setw(9)<<right<< "Hello" << std::endl;
-
-std::cout << std::setw(7) << "Hello" << std::endl << std::endl;
-
-std::cout << std::setprecision(4) << 111.11111 << std::endl;
-
-
-std::cout << std::setprecision(10) << 111.11111 << std::endl;
-
-
-std::cout << std::fixed;
-
-std::cout << std::setprecision(2) << 111.11111 << std::endl;
-std::cout << std::setprecision(10) << 111.11111 << std::endl;
-
-std::cout << 1.11111 << std::endl << std::endl;
+auto f = 3.14;
+const int &r = f;
+f = 4.14;
+std::cout << f << " " << r;
 }
