@@ -3,55 +3,63 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include <cstdlib>
-#include <climits>
 using namespace std;
-void merge_sort(int *&p, int &begin, int &mid, int &end)
+void ms_merge(int *&p, int low, int mid, int high)
 {
-    int n1 =  mid - begin +1, n2 = end -mid;
-    int n3 = n1 + n2;
-    int arr1[n1],arr2[n2],arr3[n3];
-    for (int i = begi)
+    int *arr3 = new int [high - low + 1];
+    int i = low, j = mid + 1, k = 0;
+    while ((i <= mid) && (j <= high))
     {
-        /* code */
+        if (p[i] < p[j])
+        {
+            arr3[k++] = p[i++];
+        }
+        else
+        {
+            arr3[k++] = p[j++];
+        }
     }
-    
-
-
-
+    while (i <= mid)
+    {
+        arr3[k++] = p[i++];
+    }
+    while (j <= high)
+    {
+        arr3[k++] = p[j++];
+    }
+    for (int i = low, y = 0; i <= high; y++, i++)
+    {
+        p[i] = arr3[y];
+    }
+    delete(arr3);
 }
-void ms(int *&p, int begin, int end)
-{
-    if (begin >= end)
-    {
-        return;
-    }
-    int mid = (begin + end) / 2;
-    ms(p, begin, mid);
-    ms(p, mid + 1, end);
 
-    merge_sort(p, begin, mid, end);
+void ms(int *&p, int low, int high)
+{
+    if (low >= high)
+        return;
+
+    int mid = low + (high - low) / 2;
+    ms(p, low, mid);
+    ms(p, mid + 1, high);
+
+    ms_merge(p, low, mid, high);
 }
 int main()
 {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     int n;
     cin >> n;
     int *p = new int[n];
-    if (p == nullptr)
-    {
-        exit(0);
-    }
     for (int i = 0; i < n; i++)
     {
         cin >> p[i];
     }
+
     ms(p, 0, n - 1);
     for (int i = 0; i < n; i++)
     {
-        cout<<p[i]<<" ";
+        cout << p[i] << " ";
     }
-    
 
     return 0;
 }
