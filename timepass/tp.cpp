@@ -24,6 +24,7 @@ int main() {
     cout<<s.age<<endl;
     cout<<s.firstname + ", "+ s.lastname<<endl;
     cout<<s.std;
-    cout<<s.age<<" "<<s.firstname<<" "<<s.lastname<<" "<<s.std;   
+    cout<<s.age<<" "<<s.firstname<<" "<<s.lastname<<" "<<s.std;  
+    // edited by neha
     return 0;
 }
