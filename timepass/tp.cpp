@@ -25,6 +25,7 @@ int main() {
     cout<<s.firstname + ", "+ s.lastname<<endl;
     cout<<s.std;
     cout<<s.age<<" "<<s.firstname<<" "<<s.lastname<<" "<<s.std;  
+    //edited by prince
     // edited by neha
     return 0;
 }
