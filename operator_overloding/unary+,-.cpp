@@ -1,34 +1,39 @@
 #include<bits/stdc++.h>
 #include<iostream>
-using namespace std;
 
-class ADDITION{
+
+class unary{
+
+    friend unary operator -(unary &);
 
     public:
-
-    int x = 10;
-    void operator - ()
-    {
-        x = -x;
-    }
-};
-
-class BINARY{
     int x;
-    public:
 
-    BINARY(int x)
+    unary(int x = 0)
     {
         this->x = x;
     }
 
-    
+
+    //! class overloding
+
+    // unary operator -()
+    // {
+    //     return unary(-x);
+    // }
+
 };
+
+    unary operator -(unary &a)
+    {
+        return unary(-a.x);
+    }
+using namespace std;
 int main()
 {
-    ADDITION a;
-    -a;
-    cout<<a.x;
-    BINARY
+    unary a(10);
+
+    a = -a;
+    cout<<a.x<<"\n";
 return 0;
 }
