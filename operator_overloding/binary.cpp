@@ -2,38 +2,75 @@
 #include<iostream>
 using namespace std;
 
-class binary{
-
-    public:
+class C;
+class B;
+class A;
+C operator + (B&,A&);
+C operator + (A&,B&);
+class A{
     int x;
-
-    binary(int x = 0)
+    public:
+    A(int x = 0)
     {
         this->x = x;
     }
 
+    friend C operator +(B&, A&);
+    friend C operator +(A&, B&);
+};
 
-    // binary operator + (binary &obj)
-    // {
-    //     return binary(x + obj.x);
-    // }
+class B{
 
+    int y;
+    public:
 
-    friend binary operator +(binary &,binary &);
+    B(int y = 0)
+    {
+        this->y = y;
+    }
+
+    friend C operator + (B&, A&);
+    friend C operator + (A&, B&);
 };
 
 
-binary operator +(binary &a,binary &b)
+
+class C{
+
+    public:
+    int d ;
+    C(int d = 0)
+    {
+        this->d = d;
+    }
+
+    friend C operator + (B&, A&);
+};
+
+ C operator + (B &b , A &a)
 {
-    return binary(a.x + b.x);
+    return C(b.y + a.x);
 }
+
+C operator + (A& a,B &b)
+{
+    return C(a.x + b.y);
+}
+
 
 int main()
 {
-    binary a(10),b(20), c;
-    c = a+b;
 
-    cout<<c.x<<"\n";
+
+    A a(10);
+    B b(20);
+
+    C c = b+a;
+    C d = a+b;
+
+    cout<<c.d<<endl;
+
+
 
 return 0;
 }

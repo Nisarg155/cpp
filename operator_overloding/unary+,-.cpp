@@ -1,39 +1,63 @@
 #include<bits/stdc++.h>
 #include<iostream>
-
+using namespace std;
 
 class unary{
 
-    friend unary operator -(unary &);
-
     public:
-    int x;
+    int x = 10;
 
     unary(int x = 0)
     {
         this->x = x;
     }
 
-
-    //! class overloding
-
-    // unary operator -()
-    // {
-    //     return unary(-x);
-    // }
-
+    unary operator -()
+    {
+        x = -x;
+        return *this;
+    }
 };
 
-    unary operator -(unary &a)
+
+class unary2;
+unary2 operator -(unary2&);
+
+class unary2
+{
+    public:
+
+    int x ;
+
+    unary2(int x = 0)
     {
-        return unary(-a.x);
+        this->x = x;
     }
-using namespace std;
+
+    friend unary2 operator -(unary2 &);
+};
+
+unary2 operator -(unary2 &u)
+{
+    return unary2(-u.x);
+}
+
+
 int main()
 {
     unary a(10);
 
     a = -a;
-    cout<<a.x<<"\n";
+
+    cout<<a.x<<endl;
+
+    unary2 u(50);
+
+    u = -u;
+    cout<<u.x<<endl;
+
+
+
+
 return 0;
 }
